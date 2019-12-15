@@ -17,7 +17,7 @@ public class PointGenerator {
         Vector2d upperRight = area.upperRight;
 
         for (int i = lowerLeft.x; i < upperRight.x; i++)
-            for (int j = lowerLeft.y; i < upperRight.y; j++) {
+            for (int j = lowerLeft.y; j < upperRight.y; j++) {
                 Vector2d position = new Vector2d(i, j);
 
                 if (exclude != null) {

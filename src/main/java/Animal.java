@@ -11,7 +11,7 @@ public class Animal {
     private Vector2d position;
     private Genotype genotype;
     private MapDirection direction;
-    private int energy;
+    private Integer energy;
     private int age;
     private int animalID;
     private List<IPositionChangeObserver> observers = new LinkedList<>();
@@ -25,7 +25,7 @@ public class Animal {
     }
 
     public Animal(IWorldMap map, Vector2d initialPosition) {
-        this.map = map;
+        this(map);
         this.position = initialPosition;
     }
 
@@ -37,6 +37,15 @@ public class Animal {
     public Animal(IWorldMap map, Vector2d initialPosition, int energy, Genotype genotype) {
         this(map, initialPosition, energy);
         this.genotype = genotype;
+    }
+
+
+    public void setEnergy(int energy) {
+        this.energy = energy;
+    }
+
+    private static int getMinimalEnergyToReproduce() {
+        return INITIAL_ENERGY / 2;
     }
 
     public String toString() {
@@ -65,22 +74,17 @@ public class Animal {
         this.addEnergy(-COST_PER_MOVE);
     }
 
-    public void eat (Grass grass){
-        this.addEnergy(grass.getEnergyValue());
-        // Dodać usuwanie zwierząt
-        //DELETE_GRASS!
-    }
-
-    public int getEnergy(){
+    public Integer getEnergy() {
         return this.energy;
     }
 
-    public void addEnergy(int energy){
+    public void addEnergy(int energy) {
         this.energy += energy;
-        if(this.energy < 0) this.energy = 0;
+        if (this.energy < 0) this.energy = 0;
     }
 
-    public void addAge (int age){
+    //Zobaczymy czy za starzy
+    public void addAge(int age) {
         this.age += age;
     }
 
@@ -96,37 +100,32 @@ public class Animal {
         return this.genotype;
     }
 
-    private static int getMinimalEnergyToReproduce(){
-        return INITIAL_ENERGY / 2;
-    }
-
-    public void addObserver (IPositionChangeObserver observer){
+    public void addObserver(IPositionChangeObserver observer) {
         this.observers.add(observer);
     }
 
-    public void removeObserver (IPositionChangeObserver observer){
+    public void removeObserver(IPositionChangeObserver observer) {
         this.observers.remove(observer);
     }
 
 
-    // o co kaman
-    private void notifyObservers (Vector2d oldPosition){
+    private void notifyObservers(Vector2d oldPosition) {
         this.observers.forEach(v -> v.positionChanged(oldPosition, this));
     }
 
-// ROZMNAŻANIE SKOŃCZYĆ
-    public Animal merge (Animal mum){
+
+    public Animal merge(Animal mum) {
 
         Animal dad = this;
 
-        if(dad.getEnergy() < Animal.getMinimalEnergyToReproduce() || mum.getEnergy() < Animal.getMinimalEnergyToReproduce()){
+        if (dad.getEnergy() < Animal.getMinimalEnergyToReproduce() || mum.getEnergy() < Animal.getMinimalEnergyToReproduce()) {
             return null;
         }
         // Good Bye 'NullPoint'
         Optional<Vector2d> kidPosition = Optional.ofNullable(dad.map.getFreePosition(dad.getPosition()));
-        
+
         // Good Bye Kid
-        if(kidPosition.isEmpty()){
+        if (kidPosition.isEmpty()) {
             return null;
         }
 
@@ -136,7 +135,7 @@ public class Animal {
         mum.addEnergy(-mumKidEnergy);
 
         kidEnergy += mumKidEnergy;
-        Animal kidAnimal = new Animal (dad.map, kidPosition.get(), kidEnergy, dad.genotype.merge(mum.genotype));
+        Animal kidAnimal = new Animal(dad.map, kidPosition.get(), kidEnergy, dad.genotype.merge(mum.genotype));
         return kidAnimal;
     }
 

@@ -14,7 +14,6 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
             return false;
         }
 
-        // TODO: send to Harness
         animalMap.put(animal.getPosition(), animal);
         animal.addObserver(this);
         return true;
@@ -26,7 +25,7 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
             for (int y = -1; y <= 1; y++) {
                 if (x == 0 && y == 0) continue;
                 Vector2d newPosition = new Vector2d(0, 0).add(centerPoint);
-                if (this.objectAt(newPosition.add(new Vector2d(x, y))) != null) {
+                if (this.objectAt(newPosition.add(new Vector2d(x, y))) == null) {
                     return newPosition;
                 }
             }
@@ -45,7 +44,7 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
         }
     }
 
-    @Override // no i chuj zhakuje xD
+    @Override // no i zhakuje xD
     public boolean canMoveTo(Vector2d position) {
         return true;
     }
@@ -64,7 +63,6 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
 
     @Override
     public void positionChanged(Vector2d oldPosition, Animal a) {
-        //TODO: send to Harness
         this.animalMap.remove(oldPosition, a);
         this.animalMap.put(a.getPosition(), a);
     }
