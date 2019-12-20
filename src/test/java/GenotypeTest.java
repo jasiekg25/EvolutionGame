@@ -23,7 +23,7 @@ public class GenotypeTest {
         assertTrue(g1.verify());
         assertTrue(g2.verify());
         assertTrue(g3.verify());
-        Integer[] asdf = new Integer[Genotype.GENOTYPE_SIZE];
+        Integer[] asdf = new Integer[32];
         Arrays.fill(asdf, 1);
         Genotype badGeno = new Genotype(asdf);
         assertFalse(badGeno.verify());
@@ -31,14 +31,5 @@ public class GenotypeTest {
         assertTrue(badGeno.verify());
     }
 
-    @Test
-    public void merge(){
-        int asdf = 300;
-        while(asdf-- > 0){
-            Genotype random = new Genotype();
-            assertTrue(random.merge(g2).verify());
-            assertTrue(random.merge(g1).verify());
-            assertTrue(random.merge(g3).verify());
-        }
-    }
+
 }

@@ -15,17 +15,17 @@ public class PointGeneratorTest {
 
     @Test
     public void getPoolTest(){
-        int current = map.getGrassNum();
+        int current = map.getGrassNumber();
         int area = map.getMapCorners().area();
         assertEquals(area-current, ps.getPool(map.getMapCorners(), null).size());
         map.spawnGrassInArea(map.getMapCorners(), null, 3);
-        current = map.getGrassNum();
+        current = map.getGrassNumber();
         assertEquals(area-current, ps.getPool(map.getMapCorners(), null).size());
     }
 
     @Test
     public void getRandomPointsTest(){
-        int current = map.getGrassNum();
+        int current = map.getGrassNumber();
         int mapArea = map.getMapCorners().area();
         int free = mapArea-current;
         int calc = free * JungleMap.GRASS_JUNGLE_PERCENT /100;

@@ -18,7 +18,7 @@ public class JungleMap extends AbstractWorldMap {
         jungleLowerLeft.x = (mapSize.x - jungleSize.x) / 2;
         jungleLowerLeft.y = (mapSize.y - jungleSize.y) / 2;
 
-        this.jungleSize = new Rectangle(jungleLowerLeft, jungleLowerLeft.add(jungleSize));
+        this.jungleSize = new Rectangle(jungleLowerLeft, jungleSize);
         pointGenerator = new PointGenerator(this);
         this.prepareArea(this.jungleSize, null, GRASS_JUNGLE_PERCENT);
         this.prepareArea(this.mapSize, this.jungleSize, GRASS_STEP_PERCENT);
@@ -44,7 +44,7 @@ public class JungleMap extends AbstractWorldMap {
         }
     }
 
-    public int getGrassNum(){
+    public int getGrassNumber(){
         return grassList.size();
     }
 
@@ -140,9 +140,9 @@ public class JungleMap extends AbstractWorldMap {
                         for (Animal a : strongestList) {
                             eatGrass(new Grass(new Vector2d(0,0), toEat), a);
                         }
-                    } else {
-                        eatGrass(grass, animal);
-                    }
+                    } //else {
+                        //eatGrass(grass, animal);
+                   // }
                 } else {
                     eatGrass(grass, animal);
                 }

@@ -4,6 +4,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class World {
+
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
     public static void main(String[] args){
 
         Configuration config;
@@ -40,14 +46,15 @@ public class World {
             int iterations = 0;
             while(iterations < iterLimit){
                 if(iterations % 10000 == 0) System.out.println(map.toString());
+
                 map.run();
                 cnt++;
                 iterations++;
             }
         }catch (IllegalArgumentException | IllegalStateException ex){
-            System.out.println("elo2");
+
             System.exit(666);
         }
-        System.out.println("elo4");
+
     }
 }

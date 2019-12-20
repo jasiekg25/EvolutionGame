@@ -4,7 +4,7 @@ import java.util.stream.IntStream;
 
 public class Genotype {
     public static final Integer GENOTYPE_SIZE = 32;
-    private Integer[] genotype;
+    private Integer[] genotype;// = new Integer[GENOTYPE_SIZE];
 
     public Genotype() {
         this.genotype = new Integer[GENOTYPE_SIZE];

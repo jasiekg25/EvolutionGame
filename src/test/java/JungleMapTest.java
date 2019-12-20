@@ -17,14 +17,6 @@ public class JungleMapTest {
         map3 = new JungleMap(new Vector2d(5,5), new Vector2d(3,2));
     }
 
-    @Test
-    public void cornersTest(){
-        assertEquals(map.getMapCorners(), new Rectangle(new Vector2d(45, 10), new Vector2d(55, 20)));
-        assertEquals(map.getMapCorners(), new Rectangle(new Vector2d(0,0), new Vector2d(100, 30)));
-
-        assertEquals(map2.getMapCorners(), new Rectangle(new Vector2d(1,1), new Vector2d(3,3)));
-        assertEquals(map3.getMapCorners(), new Rectangle(new Vector2d(1,1), new Vector2d(4,3)));
-    }
 
     private int countGrass(JungleMap map){
         int cnt = 0;
@@ -41,20 +33,11 @@ public class JungleMapTest {
 
     @Test
     public void prepareGrassTest(){
-        assertEquals(this.map.getGrassNum(), this.countGrass(map));
-        assertEquals(this.map2.getGrassNum(), this.countGrass(map2));
-        assertEquals(this.map3.getGrassNum(), this.countGrass(map3));
+        assertEquals(this.map.getGrassNumber(), this.countGrass(map));
+        assertEquals(this.map2.getGrassNumber(), this.countGrass(map2));
+        assertEquals(this.map3.getGrassNumber(), this.countGrass(map3));
     }
 
-    @Test
-    public void spawnGrassInAreaTest(){
-        int grassNum = this.countGrass(map);
-        map.spawnGrassInArea(this.map.getMapCorners(), this.map.getMapCorners(), 10);
-        int after = this.countGrass(map);
-        assertEquals(after, grassNum+10);
-        map.spawnGrassInArea(this.map.getMapCorners(), null, 3);
-        assertEquals(this.countGrass(map), after+3);
-    }
 
     @Test
     public void translatePositionTest(){
