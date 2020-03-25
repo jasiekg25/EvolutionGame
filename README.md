@@ -5,12 +5,6 @@
 _(Copied from Teacher's github)_
 
 
-
-
-
-
-## Projekt nr 1 - generator ewolucyjny
-
 Niniejsza treść została zaadaptowana na podstawie opisu oraz ilustracji przygotowanych przez Wojciecha Kosiora.
 Inspiracją dla niego był z kolei książki "Land of Lisp" Conrada Barskiego, który zaś zainspirował się artykułem w
 "Scientific American" :-)
